@@ -16,6 +16,10 @@ app.use((req, res, next) => {
     next(); 
 });
 
+app.get("/", (req, res) => {
+    res.send("Welcome to the Student & Course Portal API!");
+});
+
 app.use(productRoute);
 
 app.use(categoryRoute);
@@ -25,6 +29,8 @@ app.use(booksRoute);
 app.use('/students', studentRoute);
 
 app.use('/course', courseRoute);
+
+
 
 app.use('*', (req, res) => {
     res.status(404).send('<h1>404 - Page Not Found</h1>');
