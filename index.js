@@ -5,8 +5,11 @@ const app = express();
 const productRoute = require('./routes/products');
 const categoryRoute = require('./routes/categories');
 const booksRoute = require('./routes/books');
+const studentRoute = require('./routes/students');
+const courseRoute = require('./routes/course');
 
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.use((req, res, next) => {
     console.log(`${req.method} request made to ${req.url}`);
@@ -18,6 +21,10 @@ app.use(productRoute);
 app.use(categoryRoute);
 
 app.use(booksRoute);
+
+app.use('/students', studentRoute);
+
+app.use('/course', courseRoute);
 
 app.use('*', (req, res) => {
     res.status(404).send('<h1>404 - Page Not Found</h1>');
