@@ -4,18 +4,20 @@ const app = express();
 
 const productRoute = require('./routes/products');
 const categoryRoute = require('./routes/categories');
+const booksRoute = require('./routes/books');
 
-// Logging Middleware
+app.use(express.urlencoded({ extended: true }));
+
 app.use((req, res, next) => {
     console.log(`${req.method} request made to ${req.url}`);
     next(); 
 });
 
-app.use(express.json());
-
 app.use(productRoute);
 
 app.use(categoryRoute);
+
+app.use(booksRoute);
 
 app.use('*', (req, res) => {
     res.status(404).send('<h1>404 - Page Not Found</h1>');
